@@ -1,6 +1,5 @@
 package mk.ukim.finki.wp.emt_lab.service.domain.impl;
 
-
 import mk.ukim.finki.wp.emt_lab.model.domain.Author;
 import mk.ukim.finki.wp.emt_lab.repository.AuthorRepository;
 import mk.ukim.finki.wp.emt_lab.service.domain.AuthorService;

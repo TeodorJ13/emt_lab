@@ -9,4 +9,3 @@ create table book_copy (
 
 create index idx_book_copy_book_rented
     on book_copy(book_id, is_rented);
-

@@ -1,6 +1,5 @@
 package mk.ukim.finki.wp.emt_lab.model.dto;
 
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import mk.ukim.finki.wp.emt_lab.model.domain.Author;
@@ -15,19 +14,13 @@ public record CreateBookDto(
         @NotNull(message = "Category is required")
         Category category,
 
-        @NotNull(message = "Author is required")
-        Long authorId,
-
         @NotNull(message = "State is required")
         State state,
 
-        @NotNull(message = "Available copies are required")
-        @Min(value = 0, message = "Available copies cannot be negative")
-        Integer availableCopies
+        @NotNull(message = "Author is required")
+        Long authorId
 ) {
-
     public Book toBook(Author author) {
-        return new Book(name,category,author,state,availableCopies);
+        return new Book(name, category, state, author);
     }
-
 }
