@@ -3,7 +3,8 @@ package mk.ukim.finki.wp.emt_lab.model.dto;
 import mk.ukim.finki.wp.emt_lab.model.domain.Book;
 import mk.ukim.finki.wp.emt_lab.model.enums.Category;
 import mk.ukim.finki.wp.emt_lab.model.enums.State;
-
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public record DisplayBookDto(
@@ -11,8 +12,7 @@ public record DisplayBookDto(
         String name,
         Category category,
         String authorName,
-        State state,
-        Integer avaliableCopies
+        LocalDateTime date_published
 
 ) {
 
@@ -22,8 +22,7 @@ public record DisplayBookDto(
                 book.getName(),
                 book.getCategory(),
                 book.getAuthor().getName() + " " + book.getAuthor().getSurname(),
-                book.getState(),
-                book.getAvailableCopies()
+                book.getDate_published()
         );
     }
 

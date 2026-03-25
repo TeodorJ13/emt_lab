@@ -1,25 +1,42 @@
 package mk.ukim.finki.wp.emt_lab.model.domain;
 
 import jakarta.persistence.*;
-import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import mk.ukim.finki.wp.emt_lab.model.enums.State;
 
 @Entity
-@Data
 @Getter
 @Setter
-public class BookCopy extends BaseEntity {
+@NoArgsConstructor
+public class BookCopy extends BaseEntity{
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private State state;
+
+    private boolean rented;
 
     @ManyToOne
     @JoinColumn(name = "book_id")
     private Book book;
 
-    @Enumerated(EnumType.STRING)
-    private State state;
+    public State getState() {
+        return state;
+    }
 
-    private Boolean isRented = false;
+    public void setState(State state) {
+        this.state = state;
+    }
+
+    public boolean isRented() {
+        return rented;
+    }
+
+    public void setRented(boolean rented) {
+        this.rented = rented;
+    }
 
     public Book getBook() {
         return book;
@@ -29,19 +46,12 @@ public class BookCopy extends BaseEntity {
         this.book = book;
     }
 
-    public Boolean getRented() {
-        return isRented;
-    }
-
-    public void setRented(Boolean rented) {
-        isRented = rented;
-    }
-
-    public State getState() {
-        return state;
-    }
-
-    public void setState(State state) {
+    public BookCopy(State state, boolean rented, Book book) {
         this.state = state;
+        this.rented = rented;
+        this.book = book;
     }
+
+
+
 }

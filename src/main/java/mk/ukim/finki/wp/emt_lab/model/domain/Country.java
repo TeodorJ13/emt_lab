@@ -1,6 +1,5 @@
 package mk.ukim.finki.wp.emt_lab.model.domain;
 
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
