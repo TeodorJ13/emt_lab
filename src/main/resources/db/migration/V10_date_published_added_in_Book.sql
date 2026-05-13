@@ -1,1 +1,0 @@
-ALTER TABLE books ADD COLUMN date_published TIMESTAMP;
