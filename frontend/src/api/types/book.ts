@@ -5,7 +5,15 @@ export interface Book {
     state: string;
     authorId: number;
     authorName: string;
-    date_published: string;
+    availableCopies: number;
+}
+
+export interface CreateBookDto {
+    name: string;
+    category: string;
+    state: string;
+    authorId: number;
+    availableCopies: number;
 }
 
 export interface UpdateBookDto {
@@ -13,5 +21,5 @@ export interface UpdateBookDto {
     category: string;
     state: string;
     authorId: number;
-    date_published: string | null;
+    availableCopies: number;
 }

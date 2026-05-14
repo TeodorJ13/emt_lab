@@ -1,0 +1,26 @@
+import type { Role } from './role.ts';
+
+export interface LoginRequest {
+    username: string;
+    password: string;
+}
+
+export interface RegisterRequest {
+    name: string;
+    surname: string;
+    email: string;
+    username: string;
+    password: string;
+}
+
+export interface LoginResponse {
+    token: string;
+}
+
+export interface RegisterResponse {
+    username: string;
+    name: string;
+    surname: string;
+    email: string;
+    role: Role;
+}
