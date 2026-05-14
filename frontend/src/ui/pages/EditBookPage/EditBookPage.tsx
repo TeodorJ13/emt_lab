@@ -23,6 +23,7 @@ const EditBookPage = () => {
         category: '',
         state: '',
         authorId: 0,
+        availableCopies: 1,
         date_published: null,
     });
     const [saving, setSaving] = useState(false);
@@ -35,6 +36,7 @@ const EditBookPage = () => {
                 category: book.category,
                 state: book.state,
                 authorId: book.authorId,
+                availableCopies: book.availableCopies,
                 date_published: book.date_published ?? null,
             });
         }

@@ -1,39 +1,19 @@
-// import { Card, CardContent, CardActionArea, Typography, Chip, Box } from '@mui/material';
-// import { Link } from 'react-router';
-// import type { Book } from '../../../api/types/book.ts';
-//
-// interface Props {
-//     book: Book;
-// }
-//
-// const BookCard = ({ book }: Props) => {
-//     return (
-//         <Card sx={{ height: '100%' }}>
-//             <CardActionArea component={Link} to={`/books/${book.id}`} sx={{ height: '100%' }}>
-//                 <CardContent>
-//                     <Typography variant='h6' gutterBottom>{book.name}</Typography>
-//                     <Typography variant='body2' color='text.secondary' gutterBottom>{book.authorName}</Typography>
-//                     <Box sx={{ display: 'flex', gap: 1, mt: 1 }}>
-//                         <Chip label={book.category} size='small' color='primary' />
-//                     </Box>
-//                 </CardContent>
-//             </CardActionArea>
-//         </Card>
-//     );
-// };
-//
-// export default BookCard;
 import { Card, CardContent, CardActions, Typography, Button, Chip } from '@mui/material';
 import { Link } from 'react-router';
 import type { Book } from '../../../api/types/book.ts';
+import { useWishlistContext } from '../../../context/WishlistContext.tsx';
 
 interface Props {
     book: Book;
     onEdit?: () => void;
     onDelete?: () => void;
+    deleteLabel?: string;
 }
 
-const BookCard = ({ book, onEdit, onDelete }: Props) => {
+const BookCard = ({ book, onEdit, onDelete, deleteLabel = 'Delete' }: Props) => {
+    const { addToWishlist, removeFromWishlist, isInWishlist } = useWishlistContext();
+    const inWishlist = isInWishlist(book.id);
+
     return (
         <Card>
             <CardContent>
@@ -54,6 +34,13 @@ const BookCard = ({ book, onEdit, onDelete }: Props) => {
                 <Button size='small' component={Link} to={`/books/${book.id}`}>
                     View
                 </Button>
+                <Button
+                    size='small'
+                    color={inWishlist ? 'warning' : 'secondary'}
+                    onClick={() => inWishlist ? removeFromWishlist(book.id) : addToWishlist(book)}
+                >
+                    {inWishlist ? '♥ Wishlisted' : '♡ Wishlist'}
+                </Button>
                 {onEdit && (
                     <Button size='small' color='primary' onClick={onEdit}>
                         Edit
@@ -61,7 +48,7 @@ const BookCard = ({ book, onEdit, onDelete }: Props) => {
                 )}
                 {onDelete && (
                     <Button size='small' color='error' onClick={onDelete}>
-                        Delete
+                        {deleteLabel}
                     </Button>
                 )}
             </CardActions>

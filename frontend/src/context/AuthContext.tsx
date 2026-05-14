@@ -21,25 +21,36 @@ interface AuthContextType {
     logout: () => void;
     isAuthenticated: boolean;
     isAdmin: boolean;
+    isLoading: boolean;
 }
 
 const AuthContext = createContext<AuthContextType | null>(null);
+
+const decodeToken = (token: string): AuthUser | null => {
+    try {
+        const decoded = jwtDecode<JwtPayload>(token);
+        return { username: decoded.sub, role: decoded.role as Role };
+    } catch {
+        return null;
+    }
+};
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const [token, setToken] = useState<string | null>(
         localStorage.getItem('token')
     );
-    const [user, setUser] = useState<AuthUser | null>(null);
+    const [user, setUser] = useState<AuthUser | null>(() => {
+        const stored = localStorage.getItem('token');
+        return stored ? decodeToken(stored) : null;
+    });
+    const isLoading = false;
 
     useEffect(() => {
         if (token) {
-            try {
-                const decoded = jwtDecode<JwtPayload>(token);
-                setUser({
-                    username: decoded.sub,
-                    role: decoded.role as Role,
-                });
-            } catch {
+            const decoded = decodeToken(token);
+            if (decoded) {
+                setUser(decoded);
+            } else {
                 logout();
             }
         } else {
@@ -66,6 +77,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
             logout,
             isAuthenticated: !!user,
             isAdmin: user?.role === 'ADMINISTRATOR',
+            isLoading,
         }}>
             {children}
         </AuthContext.Provider>
