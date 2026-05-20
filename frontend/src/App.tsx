@@ -14,6 +14,7 @@ import AuthorDetailsPage from './ui/pages/AuthorDetailsPage/AuthorDetailsPage.ts
 import CountriesPage from './ui/pages/CountriesPage/CountriesPage.tsx';
 import CountryDetailsPage from './ui/pages/CountryDetailsPage/CountryDetailsPage.tsx';
 import WishlistPage from './ui/pages/WishlistPage/WishlistPage.tsx';
+import StatsPage from './ui/pages/StatsPage/StatsPage.tsx';
 
 function App() {
     return (
@@ -52,6 +53,10 @@ function App() {
 
                             <Route path='wishlist' element={
                                 <ProtectedRoute><WishlistPage /></ProtectedRoute>
+                            } />
+
+                            <Route path='stats' element={
+                                <ProtectedRoute><StatsPage /></ProtectedRoute>
                             } />
 
                             <Route path='*' element={<Navigate to='/' replace />} />

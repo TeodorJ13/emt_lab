@@ -32,6 +32,7 @@ const Header = () => {
                                 <FavoriteIcon />
                             </Badge>
                         </Button>
+                        <Button color='inherit' component={Link} to='/stats'>Stats</Button>
                         <Typography variant='body2'>Hi, {user?.username}</Typography>
                         <Button color='inherit' onClick={handleLogout}>Logout</Button>
                     </Box>
